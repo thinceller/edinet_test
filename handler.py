@@ -1,10 +1,23 @@
 import json
+import subprocess
+from edinet_xbrl.edinet_xbrl_downloader import EdinetXbrlDownloader
 
 
 def index(event, context):
+    xbrl_downloader = EdinetXbrlDownloader()
+
+    ticker = 7203
+    target_dir = "/tmp"
+
+    xbrl_downloader.download_by_ticker(ticker, target_dir)
+
+    result = subprocess.check_output(["ls", "-l", target_dir])
+    print(result)
+
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
-        "input": event
+        "input": event,
+        "result": result
     }
 
     response = {
@@ -13,12 +26,3 @@ def index(event, context):
     }
 
     return response
-
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """

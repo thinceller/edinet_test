@@ -16,6 +16,8 @@ package:
 functions:
   test:
     handler: handler.index
+    memorySize: 512
+    timeout: 900
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
